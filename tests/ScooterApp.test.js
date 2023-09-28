@@ -1,4 +1,4 @@
-const Scooter = require('../src/Scooter')
+cconst Scooter = require('../src/Scooter')
 const User = require('../src/User')
 const ScooterApp = require('../src/ScooterApp')
 
@@ -18,5 +18,10 @@ describe("registerUser method tests", () => {
 // log out
 
 // rent scooter
+describe('scooter is rented', () => {
+  it('removes the scooter from the station', () => {
+    expect()
+  })
+})
 
 // dock scooter
