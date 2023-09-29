@@ -27,7 +27,7 @@ describe('scooter methods', () => {
 
   //dock method
   it('docks the scooter', () => {
-    const user = new User("Joe Bloggs", "test123", 21);
+    //const user = new User("Joe Bloggs", "test123", 21);
     scooter.dock("Kensington");
     expect(scooter.station).toBe("Kensington");
     expect(scooter.user).toBe(null);

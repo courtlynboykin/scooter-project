@@ -2,7 +2,7 @@ const User = require('./User')
 const Scooter = require('./Scooter')
 
 class ScooterApp {
-  constructor(stations, registeredUsers){
+  constructor(){
     this.stations = {
       "Kensington" : [],
       "Lenox" : [],
@@ -12,46 +12,39 @@ class ScooterApp {
   }
 
   registerUser(username, password, age){
-    if(!this.registeredUsers.hasOwnProperty(username) && age >= 18 ){
+    if(this.registeredUsers[username]){
+      throw new Error ("user is already registered");
+    } else if(age < 18 ){
+      throw new Error ("user is too young");
+    } else {
       let newUser = new User(username, password, age);
-      this.registeredUsers[newUser.username] = {
-        password: newUser.password,
-        age: newUser.age
-      };
+      this.registeredUsers[username] = newUser;
       console.log("user has been registered");
       return newUser;
-      
-    }  else if(this.registeredUsers.hasOwnProperty(username)){
-       throw new Error ("user is already registered");
-    } else {
-      throw new Error ("user is too young");
     }
   }
- 
+      
+   
   loginUser(username, password){
-    if(this.registeredUsers.hasOwnProperty(username)){
+    if(this.registeredUsers[username]){
       const currentUser = this.registeredUsers[username];
-      if(currentUser.password === password){
-        currentUser.login();
+        currentUser.login(password);
         console.log("User has been logged in");
-      } else {
-        throw new Error("Incorrect password");
-      }
-    } else {
-      throw new Error("User not found");
     }
   }
   
+  
   logoutUser(username){
-    if(this.registeredUsers.hasOwnProperty(username)){
+    if(this.registeredUsers[username]){
       const currentUser = this.registeredUsers[username];
       currentUser.logout();
   } 
   }
+
   createScooter(station){
-    if(this.stations.hasOwnProperty(station)){
+    if(this.stations[station]){
       const newScooter = new Scooter(station);
-    this.stations.push[newScooter];
+    this.stations[station].push(newScooter);
     newScooter.station = station;
     console.log("created new scooter");
     return newScooter;
@@ -61,12 +54,13 @@ class ScooterApp {
   }
 
   dockScooter(scooter, station){
-    if(this.stations.hasOwnProperty(station)){
-    this.stations.push[scooter];
+    if(this.stations[station]){
+    this.stations[station].push[scooter];
     scooter.dock(station);
     console.log("scooter is docked")
-  } else if(){
+  }
 
   }
+
 }
 module.exports = ScooterApp
