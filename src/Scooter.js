@@ -11,7 +11,8 @@ class Scooter {
   }
 
   rent(user) {
-      if (this.charge > 20 && this.isBroken == false) {
+    //if the scooter is charged above 20% & not broken, it is checked out to user; otherwise, an error is thrown based on need to charge or repair
+      if (this.charge > 20 && this.isBroken == false) { 
           this.station = null;
           this.user = user;
       } else if (charge <= 20) {
